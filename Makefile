@@ -10,12 +10,20 @@ stop:
 
 .PHONY: clean
 clean:
-	rm -Rf build
+	rm -Rf build*
 
 .PHONY: clean build
 build:
 	# To create a production build (in ./build):
 	npm run build
+
+.PHONY: build-tar
+build-tar: clean
+	$(eval VERSION=$(shell git log --format=format:%H -1))
+	yarn run build
+	echo "Version $(VERSION)"
+	cd build && tar -cvf build-$(VERSION).tar *
+	mv -v build/*.tar .
 
 .PHONY: serve stop
 serve: build
