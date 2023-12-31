@@ -76,7 +76,7 @@ const SettingsPage = (props: {}) => {
 				{!!exportJSON && <Fragment>
 					<ul>
 						<li> <a download="export.json" href={"data:text/plain;charset=utf-8," + encodeURIComponent(JSON.stringify(exportJSON))}>Export all data</a>?</li>
-						<li> Umport all data: <input type="file" name="myFile" onChange={uploadFile} />	</li>
+						<li> Import all data: <input type="file" name="myFile" onChange={uploadFile} />	</li>
 					</ul>
 					<hr/>
 				</Fragment>}
