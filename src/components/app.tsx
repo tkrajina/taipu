@@ -18,7 +18,7 @@ const App = () => (
 		<Route path={"/settings"} component={SettingsPage} />
 		<Route path={"/stats"} component={Stats} />
 		<Route path={"/info"} component={Info} />
-		<Route path={"/*"} component={NotFound} />
+		<Route path={"*"} component={NotFound} />
 	</Router>
 );
 
