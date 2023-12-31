@@ -29,8 +29,7 @@ const Retype = (props: {textNo: string}) => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			document.getElementById('cursor')?.scrollIntoView(/* {behavior: "smooth"} */);
-			window.scrollBy(0, -window.screen.height/2);
+			onScroll()
 		}, 250);
 	}, []);
 
@@ -65,6 +64,10 @@ const Retype = (props: {textNo: string}) => {
 		}
 	}, [position])
 
+	const onScroll = useCallback(() => {
+		document.getElementById('cursor')?.scrollIntoView(/* {behavior: "smooth"} */);
+	}, [])
+
 	useEffect(() => {
 		for (const entry of settings.current.replacements) {
 			replacements.current[entry[0]] = entry[1];
@@ -90,6 +93,10 @@ const Retype = (props: {textNo: string}) => {
 			console.log("code:" + event.code + ", " + event.key + "meta key" + event.metaKey  + " ctrl key " + event.ctrlKey + ".")
 			if (event.ctrlKey && event.key == "j") {
 				onJump();
+				return;
+			}
+			if (event.ctrlKey && event.key == "l") {
+				onScroll();
 				return;
 			}
 			if (event.metaKey && (event.code == "KeyC" || event.code == "KeyV" || event.code == "KeyR")) {
@@ -178,6 +185,7 @@ const Retype = (props: {textNo: string}) => {
 				<strong>&lt;shift&gt;+&lt;tab&gt;</strong>: move to previous word.<br/>
 				<strong>&lt;esc&gt;</strong>: Show the rest of the text for {settings.current.unhideDuration}s<br/>
 				<strong>&lt;ctrl&gt;+j</strong>: jump on position<br/>
+				<strong>&lt;ctrl&gt;+l</strong>: scroll to cursor<br/>
 			</p>
 			<p style={{whiteSpace: "pre-line"}} /*style={{border: !!invalid ? "1px solid orange" : undefined}}*/>
 				<strong>{(text.text.substring(0, position))}</strong>

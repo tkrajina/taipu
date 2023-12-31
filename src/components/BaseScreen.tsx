@@ -62,7 +62,7 @@ export function BaseScreen(props: { children: any, selected: MenuID }) {
         <div className={style.headerLogo}>
           <Link href={"/"} style={{alignSelf: "center", justifySelf: "center"}}><img src={`/assets/logo.svg`} alt="Preact Logo" style={{width: "0.75cm"}} /></Link>
         </div>
-        <div className={style.headerCenter}></div>
+        <div id="scrollable" className={style.headerCenter}></div>
         {MENU_OPTIONS.map(o => <Fragment>
           <div className={`${style.headerMenu} ${o.id == props.selected ? style.headerMenuSelected : ""}`}>
             <Link href={o.url} style={{alignSelf: "center", textAlign: "center", fontSize: "0.9em"}}>
